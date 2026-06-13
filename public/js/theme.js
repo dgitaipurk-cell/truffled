@@ -44,15 +44,6 @@
       linkCursor: { url: "/cursors/tinted/purple/link.cur", hotspot: [0, 0] },
       textCursor: { url: "/cursors/tinted/purple/text.cur", hotspot: [0, 0] }
     },
-    "cruety-squad": {
-      name: "cruety squad",
-      bg: "#151008", bgAlt: "#0f0c06", surface: "#221a0e", surface2: "#0e6614",
-      border: "#0c8218", text: "#f8fbff", muted: "#b8b7b3", accent: "#0a9b1b", highlight: "#087915",
-      image: "/cursors/cruety-squad/bg.webp",
-      cursor: { url: "/cursors/cruety-squad/cursor.cur", hotspot: [4, 6] },
-      linkCursor: { url: "/cursors/cruety-squad/link.cur", hotspot: [10, 12] },
-      textCursor: { url: "/cursors/cruety-squad/text.cur", hotspot: [4, 6] }
-    },
     "cut-the-rope": {
       name: "cut the rope",
       bg: "#c6a16b", bgAlt: "#6b482b", surface: "#8b633b", surface2: "#d8b17a",
@@ -70,15 +61,6 @@
       cursor: { url: "/cursors/frutiger-aero/cursor.cur", hotspot: [0, 0] },
       linkCursor: { url: "/cursors/frutiger-aero/link.cur", hotspot: [5, 0] },
       textCursor: { url: "/cursors/frutiger-aero/text.cur", hotspot: [0, 0] }
-    },
-    hands: {
-      name: "hands",
-      bg: "#44403d", bgAlt: "#302d2c", surface: "#6d6662", surface2: "#6c3926",
-      border: "#79371f", text: "#f8fbff", muted: "#f0f1f3", accent: "#853619", highlight: "#672a13",
-      image: "/cursors/hands/bg.webp",
-      cursor: { url: "/cursors/hands/cursor.cur", hotspot: [0, 0] },
-      linkCursor: { url: "/cursors/hands/link.cur", hotspot: [10, 0] },
-      textCursor: { url: "/cursors/hands/text.cur", hotspot: [0, 0] }
     },
     linux: {
       name: "linux",
@@ -193,4 +175,3 @@
     initSettingsControls();
   }
 })();
- 
