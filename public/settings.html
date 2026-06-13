@@ -1,5 +1,4 @@
 
-Settings2 · HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,25 +21,24 @@ Settings2 · HTML
 <link rel="canonical" href="https://ApricityIsCool.org/">
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/theme.css">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PXHK7Q7G3Z"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-PXHK7Q7G3Z');
-</script>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-      <div class="navbar-right">
-          <a href="/"><img src="png/house-solid.svg" alt="h"></a>
-          <a href="g"><img src="png/gamepad-solid.svg" alt="g"></a>
-          <a href="a"><img src="png/apps.svg" alt="a"></a>
-          <a href="t"><img src="png/tool.svg" alt="t"></a>
-          <a href="https://discord.gg/vVqY36mzvj"><img src="png/other.svg" alt="d"></a>
-          <a href="s"><img src="png/gear-solid.svg" alt="s"></a>
-      </div>
+<div class="navbar-right">
+    <a href="/h"><img src="png/house-solid.svg" alt="h"></a>
+    <a href="g"><img src="png/gamepad-solid.svg" alt="g"></a>
+    <a href="a"><img src="png/apps.svg" alt="a"></a>
+    <a href="t"><img src="png/tool.svg" alt="t"></a>
+    <a href="https://discord.gg/vVqY36mzvj"><img src="png/other.svg" alt="d"></a>
+    <a href="s"><img src="png/gear-solid.svg" alt="s"></a>
+</div>
 <div class="settings-container">
+  <section id="themesettings" class="settings-section">
+    <h2>theme</h2>
+    <p>change the site theme</p>
+    <select id="themeSelect"></select>
+    <button id="themeReset">reset theme</button>
+  </section>
   <section id="cloaksettings" class="settings-section">
     <h2>tab cloak</h2>
     <p>disguise the tab title and icon</p>
@@ -48,14 +46,6 @@ Settings2 · HTML
       <option value="">none (default)</option>
     </select>
     <button id="cloakReset">reset cloak</button>
-  </section>
-  <section id="adsettings" class="settings-section">
-    <h2>ads</h2>
-    <div class="toggle-switch">
-      <label for="adsToggle">show ads:</label>
-      <input type="checkbox" id="adsToggle">
-    </div>
-    <p id="adsStatus" style="margin-top:5px;"></p>
   </section>
   <section id="proxysettings" class="settings-section">
     <h2>proxy</h2>
@@ -66,15 +56,15 @@ Settings2 · HTML
     </select>
     <p id="proxyStatus" style="margin-top:5px;"></p>
   </section>
-<section id="mobilesettings" class="settings-section">
-  <h2>mobile mode</h2>
-  <p>optimize games for mobile devices</p>
-  <p id="deviceInfo" style="margin: 15px 0;">device: detecting...</p>
-  <div class="toggle-switch">
-    <label for="mobileToggle">enable mobile mode</label>
-    <input type="checkbox" id="mobileToggle">
-  </div>
-</section>
+  <section id="mobilesettings" class="settings-section">
+    <h2>mobile mode</h2>
+    <p>optimize games for mobile devices</p>
+    <p id="deviceInfo" style="margin: 15px 0;">device: detecting...</p>
+    <div class="toggle-switch">
+      <label for="mobileToggle">enable mobile mode</label>
+      <input type="checkbox" id="mobileToggle">
+    </div>
+  </section>
   <section id="aboutblanksettings" class="settings-section">
     <h2>about:blank</h2>
     <p>open site in a blank tab to hide from history</p>
@@ -100,164 +90,61 @@ Settings2 · HTML
   </section>
 </div>
 <script>
-const adsToggle=document.getElementById("adsToggle");
-const adsStatus=document.getElementById("adsStatus");
 const proxySelect=document.getElementById("proxySelect");
 const proxyStatus=document.getElementById("proxyStatus");
 const PROXY_SETTING_KEY="proxyBackend";
 function getSavedProxyBackend(){
   const savedValue=localStorage.getItem(PROXY_SETTING_KEY);
-  if(savedValue==="auto"){
-    localStorage.setItem(PROXY_SETTING_KEY,"uv");
-    return "uv";
-  }
+  if(savedValue==="auto"){localStorage.setItem(PROXY_SETTING_KEY,"uv");return "uv";}
   return savedValue||"uv";
 }
-function getEffectiveProxyBackend(value=getSavedProxyBackend()){
-  return value==="scramjet"?"scramjet":"uv";
-}
+function getEffectiveProxyBackend(value=getSavedProxyBackend()){return value==="scramjet"?"scramjet":"uv";}
 function updateProxyStatus(value=getSavedProxyBackend()){
   const effective=getEffectiveProxyBackend(value);
   proxyStatus.textContent=`${effective} is selected for home search.`;
 }
-function updateProxySetting(value){
-  localStorage.setItem(PROXY_SETTING_KEY,value);
-  updateProxyStatus(value);
-}
-function updateAdSetting(s){
-  localStorage.setItem("adsEnabled",s);
-  adsStatus.textContent=s?"ads are on.":"ads are off.";
-  alert(`ads are now ${s?"on":"off"}.\nshould work now`);
-}
+function updateProxySetting(value){localStorage.setItem(PROXY_SETTING_KEY,value);updateProxyStatus(value);}
 window.addEventListener("load",()=>{
-  const e=localStorage.getItem("adsEnabled");
-  const s=e===null?true:e==="true";
-  adsToggle.checked=s;
-  adsStatus.textContent=s?"ads are on.":"ads are off.";
   const proxyBackend=getSavedProxyBackend();
   proxySelect.value=proxyBackend;
   updateProxyStatus(proxyBackend);
 });
-adsToggle.addEventListener("change",()=>{updateAdSetting(adsToggle.checked);});
 proxySelect.addEventListener("change",()=>{updateProxySetting(proxySelect.value);});
-function openInAboutBlank() {
-  const currentUrl = window.location.href;
-  const aboutBlankWindow = window.open('about:blank', '_blank');
-  if (aboutBlankWindow) {
-    aboutBlankWindow.document.write(`
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <title>New Tab</title>
-        <style>
-          body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; }
-          iframe { width: 100%; height: 100%; border: none; }
-        </style>
-      </head>
-      <body>
-        <iframe src="${currentUrl}"></iframe>
-      </body>
-      </html>
-    `);
-    aboutBlankWindow.document.close();
-  } else {
-    alert("popup blocked, please allow popups for this site");
-  }
-}
-function openIframe(){
-  const w=window.open("about:blank");
-  if(!w){alert("blocked");return;}
-  const d=w.document;
-  d.documentElement.style.margin="0";
-  d.documentElement.style.padding="0";
-  d.body.style.margin="0";
-  d.body.style.padding="0";
-  d.body.style.height="100%";
-  d.body.style.overflow="hidden";
-  const f=d.createElement("iframe");
-  f.src=window.location.href;
-  f.style.width="100vw";
-  f.style.height="100vh";
-  f.style.border="none";
-  d.body.appendChild(f);
+function openInAboutBlank(){
+  const currentUrl=window.location.href;
+  const w=window.open('about:blank','_blank');
+  if(w){w.document.write(`<!DOCTYPE html><html><head><title>New Tab</title><style>body,html{margin:0;padding:0;height:100%;overflow:hidden;}iframe{width:100%;height:100%;border:none;}</style></head><body><iframe src="${currentUrl}"></iframe></body></html>`);w.document.close();}
+  else alert("popup blocked, please allow popups for this site");
 }
 async function exportData(format="save"){
-  const cookies=document.cookie.split("; ").reduce((a,c)=>{
-    const [n,v]=c.split("=");
-    a[n]=v;
-    return a;
-  },{});
   const ls={};
-  for(let i=0;i<localStorage.length;i++){
-    const k=localStorage.key(i);
-    ls[k]=localStorage.getItem(k);
-  }
-  const ss={};
-  for(let i=0;i<sessionStorage.length;i++){
-    const k=sessionStorage.key(i);
-    ss[k]=sessionStorage.getItem(k);
-  }
-  const cachesData={};
-  if("caches"in window){
-    const names=await caches.keys();
-    for(const n of names){
-      const c=await caches.open(n);
-      const r=await c.keys();
-      cachesData[n]=r.map(e=>e.url);
-    }
-  }
-  const data={
-    exportedAt:new Date().toISOString(),
-    userAgent:navigator.userAgent,
-    cookies,
-    localStorage:ls,
-    sessionStorage:ss,
-    caches:cachesData
-  };
-  const json=JSON.stringify(data,null,2);
-  let mime="application/json";
-  let ext=format.replace(".","").toLowerCase();
-  if(ext==="data")mime="application/octet-stream";
-  if(ext==="save")mime="application/x-game-save";
-  const blob=new Blob([json],{type:mime});
+  for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);ls[k]=localStorage.getItem(k);}
+  const data={exportedAt:new Date().toISOString(),localStorage:ls};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
   const link=document.createElement("a");
-  const date=new Date().toISOString().slice(0,10);
   link.href=URL.createObjectURL(blob);
-  link.download=`Apricity_backup_${date}.${ext}`;
+  link.download=`Apricity_backup_${new Date().toISOString().slice(0,10)}.json`;
   link.click();
   URL.revokeObjectURL(link.href);
-  alert(`data exported as .${ext}`);
 }
 function importData(){
   const input=document.createElement("input");
-  input.type="file";
-  input.accept=".save,.json,.data";
+  input.type="file";input.accept=".save,.json,.data";
   input.onchange=async e=>{
-    const f=e.target.files[0];
-    if(!f)return;
+    const f=e.target.files[0];if(!f)return;
     const r=new FileReader();
     r.onload=async ev=>{
       try{
         const d=JSON.parse(ev.target.result);
-        Object.entries(d.cookies||{}).forEach(([n,v])=>{
-          document.cookie=`${n}=${v}; path=/;`;
-        });
-        Object.entries(d.localStorage||{}).forEach(([k,v])=>{
-          localStorage.setItem(k,v);
-        });
-        Object.entries(d.sessionStorage||{}).forEach(([k,v])=>{
-          sessionStorage.setItem(k,v);
-        });
-        alert("import vaild!");
-        setTimeout(()=>location.reload(),1000);
-      }catch(err){
-        alert("corrupted file");
-      }
+        Object.entries(d.localStorage||{}).forEach(([k,v])=>{localStorage.setItem(k,v);});
+        alert("import valid!");setTimeout(()=>location.reload(),1000);
+      }catch(err){alert("corrupted file");}
     };
     r.readAsText(f);
   };
   input.click();
 }
+function clearAllData(){if(confirm("clear all data?")){localStorage.clear();sessionStorage.clear();alert("done!");}}
 </script>
 <script src="/js/mobile.js"></script>
 <script src="/js/panic.js"></script>
@@ -265,4 +152,3 @@ function importData(){
 <script src="/js/theme.js"></script>
 </body>
 </html>
- 
