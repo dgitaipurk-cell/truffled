@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -55,7 +56,7 @@
          const PROXY_SETTING_KEY = "proxyBackend";
          const PENDING_PROXY_URL_KEY = "pendingProxyUrl";
          const ACTIVE_PROXY_BACKEND_KEY = "activeProxyBackend";
-
+ 
          class AppLoader {
          constructor() {
              this.apps = [];
@@ -139,7 +140,7 @@
              let url = backend === "scramjet"
                  ? (app.scramjetUrl || this.decodeUvUrl(app.url))
                  : app.url;
-
+ 
              if (app.requiresPrefix) {
                  const prefix = sessionStorage.getItem("prefix") || '';
                  url = url.replace('{prefix}', prefix);
@@ -165,7 +166,7 @@
              if (backend === "scramjet" && framePage === "/search.html") {
                  return `${framePage}?backend=scramjet&url=${encodeURIComponent(url)}`;
              }
-
+ 
              return `${framePage}?url=${encodeURIComponent(url)}`;
          }         
          renderApps() {
@@ -329,5 +330,6 @@
          });
       </script>
       <script src="/active/register-sw.js" charset="UTF-8" defer></script>
-   </body>
+   <script src="/js/theme.js"></script>
+</body>
 </html>
