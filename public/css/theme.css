@@ -1,78 +1,148 @@
-/* Apricity Theme CSS */
-:root {
-  --bg: #0e0e10;
-  --bg-alt: #0a0a0c;
-  --surface: #1a1a1f;
-  --surface-2: #222228;
-  --border: #2e2e38;
-  --text: #f2f5f7;
-  --text-muted: #aab3bb;
-  --accent: #7c6aff;
-  --highlight: #5a4ae3;
-  --radius: 8px;
-  --theme-bg-image: none;
-  --theme-bg-opacity: 0;
-  --cursor-default: url("/css/comic.cur") 0 0;
-  --cursor-link: url("/css/comiclink.cur") 0 0;
-  --cursor-text: url("/css/comictext.cur") 0 0;
-}
 
 body {
   background-color: var(--bg);
   color: var(--text);
-  cursor: var(--cursor-default);
+  scrollbar-color: var(--accent) transparent;
 }
-
-a, button, select, input[type="submit"], .game-link {
-  cursor: var(--cursor-link);
+ 
+:root[data-theme] {
+  --proxy-chrome-bg: color-mix(in srgb, var(--bg-alt) 86%, var(--surface) 14%);
+  --proxy-chrome-strip: color-mix(in srgb, var(--bg-alt) 78%, var(--surface) 22%);
+  --proxy-chrome-surface: color-mix(in srgb, var(--surface) 78%, var(--bg-alt) 22%);
+  --proxy-chrome-surface-2: color-mix(in srgb, var(--surface-2) 76%, var(--surface) 24%);
+  --proxy-chrome-border: color-mix(in srgb, var(--border) 78%, var(--text) 10%);
+  --proxy-chrome-text: var(--text);
+  --proxy-chrome-muted: var(--text-muted);
+  --proxy-tooltip-bg: color-mix(in srgb, var(--surface) 86%, var(--bg-alt) 14%);
+  --proxy-tooltip-preview-bg: color-mix(in srgb, var(--bg-alt) 70%, var(--surface) 30%);
+  --proxy-tooltip-preview-border: color-mix(in srgb, var(--border) 64%, transparent);
 }
-
-input[type="text"], input[type="url"], textarea {
-  cursor: var(--cursor-text);
-}
-
+ 
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--accent) 72%, var(--surface) 28%); border: 0; border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+::-webkit-scrollbar-corner { background: transparent; }
+ 
 body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background-image: var(--theme-bg-image);
-  background-size: cover;
-  background-position: center;
-  opacity: var(--theme-bg-opacity);
-  pointer-events: none;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--text) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--text) 6%, transparent) 1px, transparent 1px);
 }
-
-.settings-section {
-  background: var(--surface);
+ 
+body::after {
+  background:
+    linear-gradient(color-mix(in srgb, var(--bg) 38%, transparent), color-mix(in srgb, var(--bg-alt) 50%, transparent)),
+    var(--theme-bg-image);
+  background-position: center;
+  background-size: cover;
+  opacity: var(--theme-bg-opacity, 0);
+  filter: saturate(1.18) brightness(1.08);
+}
+ 
+html, body, body * {
+  cursor: var(--cursor-default, url("/css/comic.cur") 0 0), auto !important;
+}
+ 
+:is(a, button, select, option, input[type="button"], input[type="submit"], input[type="reset"], input[type="checkbox"], input[type="radio"], input[type="file"], label[for], .clickable, .navbar-right a, .navbar-right a img, .game, .game-link, .game-thumbnail, .game-gallery, .headericon-button, .proxy-tab, .bookmark-item, .iframe-action-button):is(:hover, :focus, :active),
+:is(a, button, select, option, input[type="button"], input[type="submit"], input[type="reset"], input[type="checkbox"], input[type="radio"], input[type="file"], label[for], .clickable, .navbar-right a, .navbar-right a img, .game, .game-link, .game-thumbnail, .game-gallery, .headericon-button, .proxy-tab, .bookmark-item, .iframe-action-button) {
+  cursor: var(--cursor-link, url("/css/comiclink.cur") 0 0), pointer !important;
+}
+ 
+:is(input[type="text"], input[type="password"], input[type="email"], input[type="search"], input[type="url"], input[type="tel"], textarea):is(:hover, :focus, :active),
+:is(input[type="text"], input[type="password"], input[type="email"], input[type="search"], input[type="url"], input[type="tel"], textarea) {
+  cursor: var(--cursor-text, url("/css/comictext.cur") 0 0), text !important;
+}
+ 
+.navbar, .navbar-right::before, .settings-section, #panicKeySettings, #tabCustomization, #tabbar, #footer {
+  background-color: color-mix(in srgb, var(--surface) 88%, transparent);
+  border-color: var(--border);
+}
+ 
+.settings-section { box-shadow: none; }
+ 
+.settings-page .settings-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+ 
+.settings-page .settings-section {
+  display: flex;
+  flex-direction: column;
+  padding: 22px;
+  border: 1px solid color-mix(in srgb, var(--border) 82%, var(--text) 18%);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--surface) 78%, transparent);
+  backdrop-filter: blur(8px) saturate(1.08);
+}
+ 
+.settings-page .settings-section select,
+.settings-page .settings-section input[type="url"],
+.settings-page .settings-section input[type="text"] {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 13px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.settings-section h2 {
-  color: var(--accent);
-  margin-bottom: 0.5rem;
-}
-
-select, input[type="url"] {
   background: var(--bg-alt);
   color: var(--text);
+  font-size: 15px;
+}
+ 
+.settings-page .settings-section button {
+  min-height: 42px;
+  padding: 0 16px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 0.4rem 0.6rem;
-}
-
-button {
   background: var(--accent);
-  color: #fff;
-  border: none;
-  border-radius: var(--radius);
-  padding: 0.4rem 1rem;
-  margin-top: 0.5rem;
+  color: var(--text);
+  font-weight: 600;
 }
-
-button:hover {
-  background: var(--highlight);
+ 
+.settings-page .settings-section button:hover { background: var(--highlight); }
+ 
+.settings-section h2, .settings-section h3 { color: var(--text); }
+.settings-section p { color: var(--text-muted); }
+.settings-section button { background-color: var(--accent); border-color: var(--border); color: var(--text); }
+.settings-section button:hover { background-color: var(--highlight); }
+ 
+.settings-page input[type="text"],
+.settings-page input[type="url"],
+.settings-page select {
+  background-color: var(--surface-2);
+  border-color: var(--border);
+  color: var(--text);
 }
+ 
+.index-page #uv-address {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text);
+}
+ 
+.index-page #uv-address::placeholder { color: var(--text-muted); }
+ 
+.index-page #uv-address:hover,
+.index-page #uv-address:focus {
+  background: var(--surface-2);
+  border-color: color-mix(in srgb, var(--accent) 50%, var(--text) 24%);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+ 
+#goThemeMascot {
+  position: fixed;
+  left: 22px;
+  bottom: -72px;
+  width: min(160px, 14vw);
+  height: auto;
+  opacity: 1;
+  z-index: 10020;
+  pointer-events: none;
+  user-select: none;
+  transition: opacity 0.18s ease;
+}
+ 
+#goThemeMascot.is-faded { opacity: 0.25; }
+ 
+#themeReset { display: inline-flex; width: auto; }
