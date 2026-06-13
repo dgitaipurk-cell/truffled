@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -253,10 +254,10 @@
                             thumbnail.dataset.fallbackApplied = 'true';
                             thumbnail.src = '/png/logo.png';
                         });
-
+ 
                         const label = document.createElement('span');
                         label.textContent = match.name;
-
+ 
                         item.appendChild(thumbnail);
                         item.appendChild(label);
                         item.onclick = () => this.selectSuggestedGame(match, autocomplete);
@@ -312,5 +313,6 @@
                 window.pickRandomGame = () => loader.pickRandomGame();
             });
       </script>
-   </body>
+   <script src="/js/theme.js"></script>
+</body>
 </html>
