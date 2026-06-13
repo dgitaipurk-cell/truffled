@@ -92,6 +92,7 @@ app.use("/scram/", express.static(scramjetPath));
 app.use("/libcurl/", express.static(libcurlPath));
 app.use("/baremux/", express.static(baremuxPath));
 const routes = [
+  { path: "/h", file: "home.html" },
   { path: "/", file: "index.html" },
   { path: "/g", file: "games.html" },
   { path: "/a", file: "apps.html" },
