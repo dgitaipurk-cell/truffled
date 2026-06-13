@@ -1,0 +1,78 @@
+/* Apricity Theme CSS */
+:root {
+  --bg: #0e0e10;
+  --bg-alt: #0a0a0c;
+  --surface: #1a1a1f;
+  --surface-2: #222228;
+  --border: #2e2e38;
+  --text: #f2f5f7;
+  --text-muted: #aab3bb;
+  --accent: #7c6aff;
+  --highlight: #5a4ae3;
+  --radius: 8px;
+  --theme-bg-image: none;
+  --theme-bg-opacity: 0;
+  --cursor-default: url("/css/comic.cur") 0 0;
+  --cursor-link: url("/css/comiclink.cur") 0 0;
+  --cursor-text: url("/css/comictext.cur") 0 0;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  cursor: var(--cursor-default);
+}
+
+a, button, select, input[type="submit"], .game-link {
+  cursor: var(--cursor-link);
+}
+
+input[type="text"], input[type="url"], textarea {
+  cursor: var(--cursor-text);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: var(--theme-bg-image);
+  background-size: cover;
+  background-position: center;
+  opacity: var(--theme-bg-opacity);
+  pointer-events: none;
+}
+
+.settings-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.settings-section h2 {
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+select, input[type="url"] {
+  background: var(--bg-alt);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.4rem 0.6rem;
+}
+
+button {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.4rem 1rem;
+  margin-top: 0.5rem;
+}
+
+button:hover {
+  background: var(--highlight);
+}
