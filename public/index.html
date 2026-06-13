@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apcirite - Education</title>
+  <meta name="description" content="Apcirite is an educational platform offering interactive activities, brain-training challenges, and creative learning tools for students." />
+  <meta property="og:title" content="Apcirite - Interactive Learning Resources" />
+  <meta property="og:description" content="Explore engaging educational content, problem-solving challenges, and interactive tools designed to support learning." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://apcirite.org/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Apcirite - Interactive Learning Resources" />
+  <meta name="twitter:description" content="A safe and clean educational site offering interactive activities and learning-focused tools." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0d;
+      --surface: #141414;
+      --border: #222;
+      --accent: #6c63ff;
+      --accent2: #a78bfa;
+      --text: #f0f0f0;
+      --muted: #888;
+      --tag-bg: #1a1a2e;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(13,13,13,0.92);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+    }
+    .nav-logo {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--accent2); }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1.25rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      text-decoration: none;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 7rem 2rem 5rem;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      background: var(--tag-bg);
+      border: 1px solid var(--accent);
+      color: var(--accent2);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.9rem;
+      border-radius: 999px;
+      margin-bottom: 1.8rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 520px;
+      margin: 0 auto 2.2rem;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.75rem 2rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.75rem 2rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: border-color 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--muted); }
+
+    /* ABOUT STRIP */
+    .about-strip {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+    .about-strip p {
+      max-width: 680px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+    .about-strip strong { color: var(--text); }
+
+    /* SECTION GRID */
+    .sections {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--accent); }
+    .card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    .card h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+    .card p {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.7;
+    }
+
+    /* TAGS / KEYWORD SECTION */
+    .keywords-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+    }
+    .keywords-section h3 {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .tag {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.8rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 6px;
+    }
+
+    /* TRUST BAR */
+    .trust {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+    .trust p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .trust strong { color: var(--text); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    footer span { color: var(--muted); font-size: 0.82rem; }
+    .footer-logo { font-weight: 700; color: var(--text); font-size: 0.95rem; }
+    .footer-logo em { color: var(--accent2); font-style: normal; }
+
+    @media (max-width: 600px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { display: none; }
+      .hero { padding: 4.5rem 1.2rem 3rem; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="#">Ap<span>cirite</span></a>
+    <ul class="nav-links">
+      <li><a href="#">Courses</a></li>
+      <li><a href="#">Resources</a></li>
+      <li><a href="#">Test Prep</a></li>
+      <li><a href="#">For Schools</a></li>
+    </ul>
+    <a class="nav-cta" href="#">Get Started</a>
+  </nav>
+
+  <section class="hero">
+    <span class="hero-eyebrow">Apcirite Education Platform</span>
+    <h1>One secure place for <span>all your learning</span></h1>
+    <p>Connecting students and teachers to the educational resources they need.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#">Get Started</a>
+      <a class="btn-secondary" href="#">Learn More</a>
+    </div>
+  </section>
+
+  <div class="about-strip">
+    <p>
+      <strong>Apcirite</strong> is a comprehensive education platform trusted by students, teachers, and schools nationwide.
+      Access all your courses, study materials, and learning tools in one secure, easy-to-use platform.
+    </p>
+  </div>
+
+  <div class="sections">
+    <div class="card">
+      <div class="card-icon">📐</div>
+      <h2>Academic Subjects</h2>
+      <p>Mathematics, Science, English, History, Literature, Writing, Reading, Social Studies, Geography, Biology, Chemistry, Physics, Algebra, Geometry, Calculus, Statistics, Computer Science, Programming, Foreign Languages, Art, Music.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎓</div>
+      <h2>Educational Services</h2>
+      <p>Online courses, college credit, exam preparation, test prep, tutoring, homework help, study guides, practice tests, educational videos, interactive lessons, learning resources, curriculum development, academic support, student success.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏫</div>
+      <h2>All Student Levels</h2>
+      <p>K-12 education, elementary school, middle school, high school, college, university, graduate school, continuing education, adult learning, professional development, certification programs, degree programs, homeschool education.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📝</div>
+      <h2>Test Preparation</h2>
+      <p>SAT prep, ACT prep, GRE prep, GMAT prep, LSAT prep, MCAT prep, AP courses, Advanced Placement, standardized tests, college entrance exams, professional certification exams, state assessments, final exams, midterms.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">💡</div>
+      <h2>Learning Methods</h2>
+      <p>Interactive learning, video lessons, practice quizzes, flashcards, study notes, educational games, adaptive learning, personalized education, self-paced learning, collaborative learning, project-based learning, STEM, critical thinking.</p>
+    </div>
+  </div>
+
+  <div class="keywords-section">
+    <h3>Academic Subjects</h3>
+    <div class="tags">
+      <span class="tag">Mathematics</span><span class="tag">Science</span><span class="tag">English</span>
+      <span class="tag">History</span><span class="tag">Literature</span><span class="tag">Writing</span>
+      <span class="tag">Biology</span><span class="tag">Chemistry</span><span class="tag">Physics</span>
+      <span class="tag">Calculus</span><span class="tag">Computer Science</span><span class="tag">Art</span>
+    </div>
+    <h3>Test Prep</h3>
+    <div class="tags">
+      <span class="tag">SAT Prep</span><span class="tag">ACT Prep</span><span class="tag">GRE Prep</span>
+      <span class="tag">AP Courses</span><span class="tag">MCAT Prep</span><span class="tag">LSAT Prep</span>
+      <span class="tag">State Assessments</span><span class="tag">College Entrance</span>
+    </div>
+  </div>
+
+  <div class="trust">
+    <p><strong>Trusted by schools nationwide</strong> — Join thousands of students and educators using Apcirite to power digital learning.</p>
+  </div>
+
+  <footer>
+    <span class="footer-logo">Ap<em>cirite</em></span>
+    <span>© 2026 Apcirite. All rights reserved.</span>
+    <span>apcirite.org</span>
+  </footer>
+
+</body>
+</html>
